@@ -1,0 +1,216 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>AngularJS Tutorial</title>
+</head>
+<body bgcolor="#FFFFFF" color=#000000>
+<!--------------------------------------------------------------------------->  
+
+
+<p><img src="PeriodicTableOfElementsNewSmall2.png" alt="AngularJS and REST API" width="600" height="396"/></p>
+
+
+<h2>Introduction</h2>
+
+<p>This is a tutorial for those interested in a quick introduction to AngularJS and REST API. We will build the familiar Periodic Table of the Elements found in
+every chemistry textbook, and allow the user to select a Chemical Element by clicking on its symbol to display its properties. It is assumed the reader is familiar with JavaScript, ASP.NET MVC,
+C#, Entity Framework, HTML, JSON, and CSS. I built this with VS 2015, NET 4.5.2, and Windows 7</p>
+
+<h2>Background</h2>
+
+<p>My objective with this project was to introduce AngularJS and REST API in a simple application that demonstrated the basic principles. If you've made it this far, you 
+probably already know that AngularJS is a <a href="https://en.wikipedia.org/wiki/AngularJS">JavaScript-based open-source front-end web application framework</a>.
+You are also probably familiar with the <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC Pattern</a>.
+This introduction is not intended to be comprehensive as there are numerous sources of information on AngularJS and REST API on the web, some of which I have provided a link for.
+For example, <a href="https://www.codeproject.com/script/Membership/View.aspx?mid=3402606">Rahul Rajat Singh</a> has a good series of articles on AngularJS.</p>
+
+<h2>Using the code</h2>
+
+There are 3 main components to this project, described in more detail below.
+<ol>
+	<li>The ElementsAPI Project. This is a Visual Studio 2015 project that has the REST API as the C# Controller, the "C" part of MVC. This also contains 
+	the data Model, the "M" part of MVC as a table in a SQL Server database.</li>
+	<li>PeriodicTableOfElements.html. This is the page that displays the chemical Table of Elements. Note there is also a CSS style sheet, elements_style.css.
+	This is the View, the "V" part of MVC</li>
+	<li>The Javascript and AngularJS files. This is the AngularJS Controller, also the "C" part of MVC</li>
+</ol>
+
+<h4 id="ElementsAPItopReference">1. The ElementsAPI Project</h4>
+Open the ElementsAPI project with Visual Studio. Build it by pressing F6; the project should build successfully with no errors. In order to create the database table,
+you will have to modify the ElementDBEntities Connection String in the Web.config file with the name of a SQL Server Data Source and Initial Catalog on your computer. <a href="https://www.connectionstrings.com/sql-server/">Here is
+more information on SQL Connection Strings</a>. You will also have to modify the truncate command on line 31 of Configuration.cs to have your database name. To create the table, open the Package Manager Console (View -> Other Windows) and run the following commands:
+<ol>
+	<li> Enable-Migrations (If you get the message: "Migrations have already been enabled in project 'ElementsAPI'", you can ignore it)
+	<li> Update-Database
+</ol>
+<p>
+This should create a single database table called Elements using the <a href="https://msdn.microsoft.com/en-us/library/jj193542(v=vs.113).aspx">Entity Framework Code First Model</a>.
+It will also populate the table with the first 50 Chemical Elements. (I'll provide the remaining elements in the future.) If you are unable to create the Elements table
+using Entity Framework, I've provided a file called CreateElementsTable.sql you can use to create the table manually. 
+Press F5 to run the ElementsAPI project in debug mode. You might want to place a breakpoint in this key portion of the C# code, the controller, in ElementController.cs. This
+is the REST API to fetch a single element from the Elements table. (For simplicity, I've made the ID in the database the same as the Atomic Number of the element.)
+ <pre lang="C#">
+[Route("api/Element/{id}")]
+[HttpGet]
+public Element Get(int? id)
+{
+	List<Element> elements = dbContext.Elements.ToList();
+
+	var element = dbContext.Elements.Find(id.Value);
+	if (element == null)
+	{
+		return null;
+	}
+	return element;
+}
+</pre>
+		
+When the ElementsAPI project is running, if you have the curl utility installed, you can execute the API like this: <code>curl -X GET http://localhost:64227/api/Element/1 </code>
+Note that we have included the id of 1 at the end of the URL and thus are fetching the first element from the database. (The "64227" in the API is simply the port id and is set via the Project URL in the
+project's properties.) You should get this JSON as response:
+<pre lang="C#">
+{"ID":1,"AtomicNumber":1,"AtomicWeight":1.008,"Name":"Hydrogen","Symbol":"H","MeltingPoint":-259.0,"BoilingPoint":253.0,"Density":0.09,
+"EarthCrustPerCentage":0.14,"Discovered":"1776","Group":1,"ElectronConfiguration":"1s1","IonizationEnergy":13.6}
+</pre>
+</p>
+
+
+<h4>2. PeriodicTableOfElements.html</h4>
+<p>In Windows explorer, right-click on PeriodicTableOfElements.html, and select "Open With Chrome." (You might also want to open Chrome's "Developer Tools" window in order to see any error messages.)
+The page should appear like the image above, consisting essentially 
+of a button for each Chemical Element. Clicking on one of them, Carbon for instance, will display various properties about the Element (the Atomic Mass, Melting Point, Density, and so on).
+</p>
+
+
+<h4>3. The Javascript and AngularJS files</h4>
+<p>This is the heart of this project and where we get to see AngularJS in action. (Thanks to <a href="https://www.codeproject.com/Articles/995498/Angular-Tutorial-Part-Understanding-Modules-and">Rahul Rajat Singh</a>
+for his article on modules and controllers.) The file app/app.js simply contains an
+ <a href="https://developer.mozilla.org/en-US/docs/Glossary/IIFE">IIFE (Immediately Invoked Function Expression)</a>, a JavaScript function that runs as soon as it is defined.
+<pre lang="C#">(function(){
+    myModule = angular.module('myAngularApplicationElements', []);
+}())
+</pre>
+
+<p>Note the name of the module, myAngularApplicationElements, which is specified in the HTML tag of PeriodicTableOfElements.html to "wire-up" our html and AngularJS: 
+<pre lang="C#">&lt;html ng-app="myAngularApplicationElements&gt;</pre>
+In that line of html, <code>ng-app</code> is an AngularJS <i>directive</i> to <a href="https://docs.angularjs.org/api/ng/directive/ngApp">auto-bootstrap</a> our application.
+The file app/elements/elementsController.js is where things get interesting. This is our AngularJS <i>controller</i>, a JavaScript object that specifies the data to be used in the view.
+In our html we specify the controller using the <code>ng-controller</code> <i>directive</i>:
+<pre lang="C#">&lt;body ng-controller="elementsController"&gt;</pre>
+
+The JavaScript method <code>fetchElement</code> is what gets called when we 
+click on a button. In the HTML we use the AngularJS <code>ng-click</code> <i>directive</i> to invoke the fetchElement method, passing in the database ID:
+<pre lang="C#">&lt;input type="button" ng-click="fetchElement(1)"&gt;</pre>
+<code>$scope</code> is the AngularJS <i>directive</i> that can be thought of as a "glue" between the controller and the view.
+Here is the fetchElement controller, where we invoke a method called <code>remoteElementsService.fetchElement(id)</code> (discussed in a moment) to fetch the data
+from the database and assign it to <code>$scope</code>.
+<pre lang="C#">
+$scope.fetchElement = function (id) {
+	remoteElementsService.fetchElement(id)
+		.success(function (data, status, headers, config) {
+			$scope.singleElement = data;
+		})
+		.error(function (data, status, headers, config) {
+			$scope.singleElement = null;
+		$scope.error = "Failed to retrieve item from server: id=" + id;
+	});
+};
+</pre>
+</p>
+		
+<p>	The <code>remoteElementsService.fetchElement(id)</code> in the above JavaScript method is encapsulated in an AngularJS <i>service</i> in 
+app/elements/remoteElementsService.js. Separating the service from the controller in this way allows
+the service to be reused by other parts of the code if needed. The key part is an AngularJS pre-defined <a href="https://docs.angularjs.org/api/ng/service/$http"><i>service</i></a> called $http.
+It does the "heavy lifting" of invoking the API in the ElementsAPI <a href="#ElementsAPItopReference">ASP.NET MVC code above </a>. In the service, the method is called _fetchElement,
+with the leading underscore, which will be explained shortly.</p>
+<pre lang="C#">
+var _fetchElement = function (id) {
+	return $http.get('http://localhost:64227/api/Element/' + id);
+};
+</pre>
+<p>Note that in the service the method is called <code>_fetchElement</code> (with the leading underscore), but when we call it from the controller we call <code>fetchElement</code>
+(with no leading underscore). This is the result of using a JavaScript pattern called <a href="https://christianheilmann.com/2007/08/22/again-with-the-module-pattern-reveal-something-to-the-world/">the Revealing Module Pattern</a>.
+You can see this at the end of app\elements\remoteElementsService.js:
+<pre lang="C#">
+	return {
+		fetchElements:		_fetchElements,
+		fetchElement:		_fetchElement
+};
+</pre>
+
+<p>
+The data that is returned from the controller is placed in $scope.singleElement, which in turn is displayed in PeriodicTableOfElements.html
+within the set of double curly braces known as AngularJS <i>templates</i>, like this: <code>{{ singleElement.ID }} </code>
+Let's look at an example. If you hover over the <b>He</b> button in the upper right-hand corner of the table of Elements, the name of the element, "Helium" is displayed.
+When we click the button, the AngularJS controller calls the AngularJS service, which in turn invokes the ElementsAPI <a href="#ElementsAPItopReference">ASP.NET MVC code above </a>.
+In the image below, we can see the results.
+<img src="PeriodicTableOfElementsSingleElementOriginalSmall2.png" alt="AngularJS and REST API" width="600" height="52"/>
+</p>
+
+
+<p>In addition to the API to retrieve a single Element by its ID, there is also an API to fetch <b>all</b> the Elements in the database table in ElementController.cs.
+<pre lang="C#">
+[Route("api/Element")]
+[HttpGet]
+public IEnumerable<ElementsAPI.Models.Element> Get()
+{
+	var elements = dbContext.Elements.ToList().OrderBy(s => s.AtomicNumber);
+	return elements;
+}
+</pre>
+<p>There is a corresponding fetchElements (note the plural) method in elementsController.js that fetches all the data returned from the service into <code>$scope.elements</code>.
+<pre lang="C#">
+var elementsController = function ($scope, $filter, remoteElementsService) {
+	    $scope.fetchElements = function () {
+            remoteElementsService.fetchElements()
+			.success(function (data, status, headers, config) {
+			    $scope.elements = data;
+			})
+			.error(function (data, status, headers, config) {
+			    $scope.elements = null;
+			    $scope.error = "Failed to retrieve item from server: id=";
+			});
+	    };
+</pre>
+
+Likewise there is a _fetchElements (note the plural and leading underscore) method in remoteElementsService.js which invokes the API in the ElementsAPI <a href="#ElementsAPItopReference">ASP.NET MVC code above</a>:
+<pre lang="C#">
+var _fetchElements = function () {
+	return $http.get('localhost:64227/api/Element');
+};
+</pre>
+Again, the leading underscore in the name _fetchElements is the result of using a JavaScript pattern called <a href="https://christianheilmann.com/2007/08/22/again-with-the-module-pattern-reveal-something-to-the-world/">the Revealing Module Pattern</a>,
+where you can see this at the end of app\elements\remoteElementsService.js:
+<pre lang="C#">
+	return {
+		fetchElements:		_fetchElements,
+		fetchElement:		_fetchElement
+};
+</pre>
+</p>
+	
+<p>In the html file, note the <code>ng-repeat</code> <i>directive</i> to iterate over all the items of the collection.
+<pre lang="C#">
+	&lt;tr ng-repeat="singleElement in elements | orderBy: (isOrderDescending == true ? '-': '') + orderByField | filter:filterString"&gt;
+</pre>
+The <code>| orderBy:</code> and <code>| filter:filterString</code> are AngularJS <i>filters</i> which, as the names suggest, select only
+the database records that contain the filterString, and orders them alphabetically based on the orderByField.
+And as with the case where we returned a single row from the database, we display the fields by using the set of double curly braces like this: <code>{{ singleElement.ID }} </code>
+Let's look at an example. In the image below, we have selected all the elements in the database by clicking the "Get Elements" button, and then filtered on the ones that contain the string "ium" 
+(many have been omitted for clarity!)		 
+<img src="PeriodicTableOfElementsManyElementsOriginalSmall2.png" alt="AngularJS and REST API" width="600" height="97"/></p>
+
+<h2>Conclusion</h2>
+<p>I hope this article gives you a feel for what you can do with AngularJS. Try adding some functionality to this project, and if you come up with something
+you would like to share, put it in the comments below. As an example, the 10 buttons labelled "Alkali Metal", "Alkaline Earth", and so on,
+only serve as a color key for the buttons in the table. In other words, they currently have no action associated with clicking them. A good exercise would be to give them 
+some action by using the <code>ng-click</code> <i>directive</i>, and then writing some code in the JavaScript controller, perhaps a pop-up with a description of what an "Alkali Metal" is.</p>
+
+<p>Version 1.0.0.0</p>
+
+<!-------------------------------    That's it!   --------------------------->
+</body>
+
+</html>
+
