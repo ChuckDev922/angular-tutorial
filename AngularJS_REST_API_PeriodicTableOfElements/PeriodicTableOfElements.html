@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html ng-app="myAngularApplicationElements">
+<head>
+	<title>Periodic Table of Chemical HTML</title>
+
+	<script src="libs/angular.min.js"></script>
+	<script src="app/app.js"></script>
+	<script src="app/elements/remoteElementsService.js"></script>
+	<script src="app/elements/elementsController.js"></script>
+
+    <link href="css/elements_style.css" rel="stylesheet">
+	<link href="css/bootstrap.css" rel="stylesheet">
+
+    <script>
+    </script>
+</head>
+
+<body class="body-cep" ng-controller="elementsController">
+    <main>
+        <h1>Periodic Table of the Elements</h1>
+
+        <div class="elements">
+            <div class="btn-group">
+                <input type="button" ng-click="fetchElement(1)" value="H" class="btn-cep btn-success-cep btn-nonmetal-cep" data-toggle="tooltip" title="Hydrogen" id="Hydrogen">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" ng-click="fetchElement(2)" value="He" class="btn-cep btn-success-cep btn-noblegas-cep"  data-toggle="tooltip" title="Helium" id="Helium">
+            </div>
+            
+            <div class="btn-group">
+                <input type="button" ng-click="fetchElement(3)" value="Li" class="btn-cep btn-success-cep btn-alkali-metal-cep"  data-toggle="tooltip" title="Lithium" id="Lithium">
+                <input type="button" ng-click="fetchElement(4)" value="Be" class="btn-cep btn-success-cep btn-alkaline-earth-cep"  data-toggle="tooltip" title="Beryllium" id="Beryllium">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" ng-click="fetchElement(5)" value="B" class="btn-cep btn-success-cep btn-semimetal-cep"   data-toggle="tooltip" title="Boron" id="Boron">
+                <input type="button" ng-click="fetchElement(6)" value="C" class="btn-cep btn-success-cep btn-nonmetal-cep"   data-toggle="tooltip" title="Carbon" id="Carbon">
+                <input type="button" ng-click="fetchElement(7)" value="N" class="btn-cep btn-success-cep btn-nonmetal-cep"   data-toggle="tooltip" title="Nitrogen" id="Nitrogen">
+                <input type="button" ng-click="fetchElement(8)" value="O" class="btn-cep btn-success-cep btn-nonmetal-cep"   data-toggle="tooltip" title="Oxygen" id="Oxygen">
+                <input type="button" ng-click="fetchElement(9)" value="F" class="btn-cep btn-success-cep btn-halogen-cep"   data-toggle="tooltip" title="Fluorine" id="Fluorine">
+                <input type="button" ng-click="fetchElement(10)" value="Ne" class="btn-cep btn-success-cep btn-noblegas-cep"  data-toggle="tooltip" title="Neon" id="Neon">
+            </div>
+
+            <div class="btn-group">
+                <input type="button" ng-click="fetchElement(11)" value="Na" class="btn-cep btn-success-cep btn-alkali-metal-cep"  data-toggle="tooltip" title="Sodium" id="Sodium">
+                <input type="button" ng-click="fetchElement(12)" value="Mg" class="btn-cep btn-success-cep btn-alkaline-earth-cep"  data-toggle="tooltip" title="Magnesium" id="Magnesium">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" class="btn-empty-cep">
+                <input type="button" ng-click="fetchElement(13)" value="Al" class="btn-cep btn-success-cep btn-basic-metal-cep"  data-toggle="tooltip" title="Aluminium"                   id="Aluminium">
+                <input type="button" ng-click="fetchElement(14)" value="Si" class="btn-cep btn-success-cep btn-semimetal-cep"  data-toggle="Silicon" title="hydrogen" id="Silicon">
+                <input type="button" ng-click="fetchElement(15)" value="P" class="btn-cep btn-success-cep btn-nonmetal-cep"  data-toggle="tooltip" title="Phosphorus"                    id="Phosphorus">
+                <input type="button" ng-click="fetchElement(16)" value="S" class="btn-cep btn-success-cep btn-nonmetal-cep"  data-toggle="tooltip" title="Sulfur"                    id="Sulfur">
+                <input type="button" ng-click="fetchElement(17)" value="Cl" class="btn-cep btn-success-cep btn-halogen-cep"  data-toggle="tooltip" title="Chlorine"   id="Chlorine">
+                <input type="button" ng-click="fetchElement(18)" value="Ar" class="btn-cep btn-success-cep btn-noblegas-cep"  data-toggle="tooltip" title="Argon"  id="Argon">
+            </div>
+
+            <div class="btn-group">
+                <input type="button" ng-click="fetchElement(19)" value="K" class="btn-cep btn-success-cep btn-alkali-metal-cep"  data-toggle="tooltip" title="Potassium"  id="Potassium">
+                <input type="button" ng-click="fetchElement(20)" value="Ca" class="btn-cep btn-success-cep btn-alkaline-earth-cep"  data-toggle="tooltip" title="Calcium" id="Calcium">
+                <input type="button" ng-click="fetchElement(21)" value="Sc" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Scandium" id="Scandium">
+                <input type="button" ng-click="fetchElement(22)" value="Ti" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Titanium" id="Titanium">
+                <input type="button" ng-click="fetchElement(23)" value="V"  class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Vanadium" id="Vanadium">
+                <input type="button" ng-click="fetchElement(24)" value="Cr" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Chromium" id="Chromium">
+                <input type="button" ng-click="fetchElement(25)" value="Mn" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Manganese" id="Manganese">
+                <input type="button" ng-click="fetchElement(26)" value="Fe" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Iron" id="Iron">
+                <input type="button" ng-click="fetchElement(27)" value="Co" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Cobalt" id="Cobalt">
+                <input type="button" ng-click="fetchElement(28)" value="Ni" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Nickel" id="Nickel">
+                <input type="button" ng-click="fetchElement(29)" value="Cu" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Copper" id="Copper">
+                <input type="button" ng-click="fetchElement(30)" value="Zn" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Zinc" id="Zinc">
+                <input type="button" ng-click="fetchElement(31)" value="Ga" class="btn-cep btn-success-cep btn-basic-metal-cep"  data-toggle="tooltip" title="Gallium" id="Gallium"> 
+                <input type="button" ng-click="fetchElement(32)" value="Ge" class="btn-cep btn-success-cep btn-semimetal-cep"  data-toggle="tooltip" title="Germanium" id="Germanium">
+                <input type="button" ng-click="fetchElement(33)" value="As" class="btn-cep btn-success-cep btn-semimetal-cep"  data-toggle="tooltip" title="Arsenic" id="Arsenic"> 
+                <input type="button" ng-click="fetchElement(34)" value="Se" class="btn-cep btn-success-cep btn-nonmetal-cep"  data-toggle="tooltip" title="Selenium" id="Selenium">
+                <input type="button" ng-click="fetchElement(35)" value="Br" class="btn-cep btn-success-cep btn-halogen-cep"  data-toggle="tooltip" title="Bromine" id="Bromine"> 
+                <input type="button" ng-click="fetchElement(36)" value="Kr" class="btn-cep btn-success-cep btn-noblegas-cep"  data-toggle="tooltip" title="Krypton" id="Krypton"> 
+            </div>
+
+            <div class="btn-group">
+                <input type="button" ng-click="fetchElement(37)" value="Rb" class="btn-cep btn-success-cep btn-alkali-metal-cep"  data-toggle="tooltip" title="Rubidium" id="Rubidium">
+                <input type="button" ng-click="fetchElement(38)" value="Sr" class="btn-cep btn-success-cep btn-alkaline-earth-cep"  data-toggle="tooltip" title="Strontium" id="Strontium">
+                <input type="button" ng-click="fetchElement(39)" value="Y"  class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Yttrium" id="Yttrium">
+                <input type="button" ng-click="fetchElement(40)" value="Zr" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Zirconium" id="Zirconium">
+                <input type="button" ng-click="fetchElement(41)" value="Nb" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Niobium" id="Niobium">
+                <input type="button" ng-click="fetchElement(42)" value="Mo" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Molybdenum" id="Molybdenum">
+                <input type="button" ng-click="fetchElement(43)" value="Tc" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Technetium" id="Technetium">
+                <input type="button" ng-click="fetchElement(44)" value="Ru" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Ruthenium" id="Ruthenium">
+                <input type="button" ng-click="fetchElement(45)" value="Rh" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Rhodium" id="Rhodium">
+                <input type="button" ng-click="fetchElement(46)" value="Pd" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Palladium" id="Palladium">
+                <input type="button" ng-click="fetchElement(47)" value="Ag" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Silver" id="Silver">
+                <input type="button" ng-click="fetchElement(48)" value="Cd" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Cadmium" id="Cadmium">
+                <input type="button" ng-click="fetchElement(49)" value="In" class="btn-cep btn-success-cep btn-basic-metal-cep"  data-toggle="tooltip" title="Indium" id="Indium">
+                <input type="button" ng-click="fetchElement(50)" value="Sn" class="btn-cep btn-success-cep btn-basic-metal-cep"  data-toggle="tooltip" title="Tin" id="Tin">
+                <input type="button" ng-click="fetchElement(51)" value="Sb" class="btn-cep btn-success-cep btn-semimetal-cep"  data-toggle="tooltip" title="Antimony" id="Antimony">
+                <input type="button" ng-click="fetchElement(52)" value="Te" class="btn-cep btn-success-cep btn-semimetal-cep"  data-toggle="tooltip" title="Tellurium" id="Tellurium">
+                <input type="button" ng-click="fetchElement(53)" value="I"  class="btn-cep btn-success-cep btn-halogen-cep"  data-toggle="tooltip" title="Iodine" id="Iodine">
+                <input type="button" ng-click="fetchElement(54)" value="Xe" class="btn-cep btn-success-cep btn-noblegas-cep"  data-toggle="tooltip" title="Xenon" id="Xenon">
+            </div>
+
+            <div class="btn-group">
+                <input type="button" ng-click="fetchElement(55)" value="Cs" class="btn-cep btn-success-cep btn-alkali-metal-cep"  data-toggle="tooltip" title="Cesium" id="Cesium">
+                <input type="button" ng-click="fetchElement(56)" value="Ba" class="btn-cep btn-success-cep btn-alkaline-earth-cep"  data-toggle="tooltip" title="Barium" id="Barium">
+                <input type="button" ng-click="fetchElement(-1)" value="lanthanides" class="btn-cep btn-success-cep btn-small-lanthanides-cep"  data-toggle="tooltip" title="Lanthanides" id="Lanthanides"  onclick="myFunction()">
+                <input type="button" ng-click="fetchElement(72)" value="Hf" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Hafnium" id="Hafnium">
+                <input type="button" ng-click="fetchElement(73)" value="Ta" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Tantalum" id="Tantalum">
+                <input type="button" ng-click="fetchElement(74)" value="W"  class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Tungsten" id="Tungsten">
+                <input type="button" ng-click="fetchElement(75)" value="Re" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Rhenium" id="Rhenium">
+                <input type="button" ng-click="fetchElement(76)" value="Os" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Osmium" id="Osmium">
+                <input type="button" ng-click="fetchElement(77)" value="Ir" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Iridium" id="Iridium">
+                <input type="button" ng-click="fetchElement(78)" value="Pt" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Platinum" id="Platinum">
+                <input type="button" ng-click="fetchElement(79)" value="Au" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Gold" id="Gold">
+                <input type="button" ng-click="fetchElement(80)" value="Hg" class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Mercury" id="Mercury">
+                <input type="button" ng-click="fetchElement(81)" value="Tl" class="btn-cep btn-success-cep btn-basic-metal-cep"  data-toggle="tooltip" title="Thallium" id="Thallium">
+                <input type="button" ng-click="fetchElement(82)" value="Pb" class="btn-cep btn-success-cep btn-basic-metal-cep"  data-toggle="tooltip" title="Lead" id="Lead">
+                <input type="button" ng-click="fetchElement(83)" value="Bi" class="btn-cep btn-success-cep btn-basic-metal-cep"  data-toggle="tooltip" title="Bismuth" id="Bismuth">
+                <input type="button" ng-click="fetchElement(84)" value="Po" class="btn-cep btn-success-cep btn-semimetal-cep"  data-toggle="tooltip" title="Polonium" id="Polonium">
+                <input type="button" ng-click="fetchElement(85)" value="At" class="btn-cep btn-success-cep btn-halogen-cep"  data-toggle="tooltip" title="Astatine" id="Astatine">
+                <input type="button" ng-click="fetchElement(86)" value="Rn" class="btn-cep btn-success-cep btn-noblegas-cep"  data-toggle="tooltip" title="Radon" id="Radon">
+            </div>
+
+            <div class="btn-group">
+                <input type="button" ng-click="fetchElement(87)"  value="Fr"  class="btn-cep btn-success-cep btn-alkali-metal-cep"  data-toggle="tooltip" title="Francium" id="Francium">
+                <input type="button" ng-click="fetchElement(88)"  value="Ra"  class="btn-cep btn-success-cep btn-alkaline-earth-cep"  data-toggle="tooltip" title="Radium" id="Radium">
+                <input type="button" ng-click="fetchElement(-2)"  value="actinides" class="btn-cep btn-success-cep btn-small-actinides-cep"  data-toggle="tooltip" title="Actinides" id="Actinides">
+                <input type="button" ng-click="fetchElement(104)" value="Rf"  class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Rutherfordium" id="Rutherfordium">
+                <input type="button" ng-click="fetchElement(105)" value="Db"  class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Dubnium" id="Dubnium">
+                <input type="button" ng-click="fetchElement(106)" value="Sg"  class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Seaborgium" id="Seaborgium">
+                <input type="button" ng-click="fetchElement(107)" value="Bh"  class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Bohrium" id="Bohrium">
+                <input type="button" ng-click="fetchElement(108)" value="Hs"  class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Hassium" id="Hassium">
+                <input type="button" ng-click="fetchElement(109)" value="Mt"  class="btn-cep btn-success-cep btn-transition-metal-cep"  data-toggle="tooltip" title="Meitnerium" id="Meitnerium">
+                <input type="button" ng-click="fetchElement(110)" value="Ds"  class="btn-cep btn-success-cep btn-transition-metal-cep" id="">
+                <input type="button" ng-click="fetchElement(111)" value="Rg"  class="btn-cep btn-success-cep btn-transition-metal-cep" id="">
+                <input type="button" ng-click="fetchElement(112)" value="Cn"  class="btn-cep btn-success-cep btn-transition-metal-cep" id="">
+                <input type="button" ng-click="fetchElement(113)" value="Uut" class="btn-cep btn-success-cep btn-basic-metal-cep" id="">
+                <input type="button" ng-click="fetchElement(114)" value="Fl"  class="btn-cep btn-success-cep btn-basic-metal-cep" id="">
+                <input type="button" ng-click="fetchElement(115)" value="Uup" class="btn-cep btn-success-cep btn-basic-metal-cep" id="">
+                <input type="button" ng-click="fetchElement(116)" value="Lv"  class="btn-cep btn-success-cep btn-basic-metal-cep" id="">
+                <input type="button" ng-click="fetchElement(117)" value="Uus" class="btn-cep btn-success-cep btn-halogen-cep" id="">
+                <input type="button" ng-click="fetchElement(118)" value="Uuo" class="btn-cep btn-success-cep btn-noblegas-cep" id="">
+            </div>
+
+            <hr />
+            <div class="btn-group">
+                <input type="button" ng-click="fetchElement(57)" value="La" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Lanthanum" id="Lanthanum">
+                <input type="button" ng-click="fetchElement(58)" value="Ce" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Cerium" id="Cerium">
+                <input type="button" ng-click="fetchElement(59)" value="Pr" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Praseodymium" id="Praseodymium">
+                <input type="button" ng-click="fetchElement(60)" value="Nd" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Neodymium" id="Neodymium">
+                <input type="button" ng-click="fetchElement(61)" value="Pm" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Promethium" id="Promethium">
+                <input type="button" ng-click="fetchElement(62)" value="Sm" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Samarium" id="Samarium">
+                <input type="button" ng-click="fetchElement(63)" value="Eu" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Europium" id="Europium">
+                <input type="button" ng-click="fetchElement(64)" value="Gd" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Gadolinium" id="Gadolinium">
+                <input type="button" ng-click="fetchElement(65)" value="Tb" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Terbium" id="Terbium">
+                <input type="button" ng-click="fetchElement(66)" value="Dy" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Dysprosium" id="Dysprosium">
+                <input type="button" ng-click="fetchElement(67)" value="Ho" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Holmium" id="Holmium">
+                <input type="button" ng-click="fetchElement(68)" value="Er" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Erbium" id="Erbium">
+                <input type="button" ng-click="fetchElement(69)" value="Tm" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Thulium" id="Thulium">
+                <input type="button" ng-click="fetchElement(70)" value="Yb" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Ytterbium" id="Ytterbium">
+                <input type="button" ng-click="fetchElement(71)" value="Lu" class="btn-cep btn-success-cep btn-lanthanides-cep"  data-toggle="tooltip" title="Lutetium" id="Lutetium">
+            </div>
+
+            <div class="btn-group">
+                <input type="button" ng-click="fetchElement(89)"  value="Ac" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Actinium" id="Actinium">
+                <input type="button" ng-click="fetchElement(90)"  value="Th" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Thorium" id="Thorium">
+                <input type="button" ng-click="fetchElement(91)"  value="Pa" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Protactinium" id="Protactinium">
+                <input type="button" ng-click="fetchElement(92)"  value="U"  class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Uranium" id="Uranium">
+                <input type="button" ng-click="fetchElement(93)"  value="Np" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Neptunium" id="Neptunium">
+                <input type="button" ng-click="fetchElement(94)"  value="Pu" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Plutonium" id="Plutonium">
+                <input type="button" ng-click="fetchElement(95)"  value="Am" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Americium" id="Americium">
+                <input type="button" ng-click="fetchElement(96)"  value="Cm" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Curium" id="Curium">
+                <input type="button" ng-click="fetchElement(97)"  value="Bk" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Berkelium" id="Berkelium">
+                <input type="button" ng-click="fetchElement(98)"  value="Cf" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Californium" id="Californium">
+                <input type="button" ng-click="fetchElement(99)"  value="Es" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Einsteinium" id="Einsteinium">
+                <input type="button" ng-click="fetchElement(100)" value="Fm" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Fermium" id="Fermium">
+                <input type="button" ng-click="fetchElement(101)" value="Md" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Mendelevium" id="Mendelevium">
+                <input type="button" ng-click="fetchElement(102)" value="No" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Nobelium" id="Nobelium">
+                <input type="button" ng-click="fetchElement(103)" value="Lr" class="btn-cep btn-success-cep btn-actinides-cep"  data-toggle="tooltip" title="Lawrencium" id="Lawrencium">
+            </div>
+
+            <hr />
+            <div class="btn-group">
+                <button type="button" class="btn btn-alkali-metal-cep">Alkali Metal</button>
+                <button type="button" class="btn btn-alkaline-earth-cep">Alkaline Earth</button>
+                <button type="button" class="btn btn-transition-metal-cep">Transition Metal</button>
+                <button type="button" class="btn btn-basic-metal-cep">Basic Metal</button>
+                <button type="button" class="btn btn-semimetal-cep">Semimetal</button>
+                <button type="button" class="btn btn-nonmetal-cep">Nonmetal</button>
+                <button type="button" class="btn btn-halogen-cep">Halogen</button>
+                <button type="button" class="btn btn-noblegas-cep">Noble Gas</button>
+                <button type="button" class="btn btn-lanthanides-cep">Lanthanide</button>
+                <button type="button" class="btn btn-actinides-cep">Actinide</button>
+            </div> 
+
+        </div>
+        <hr />
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Atomic Number
+                        </th>
+                        <th>
+                            Atomic Weight
+                        </th>
+                        <th>
+                            Element Name
+                        </th>
+                        <th>
+                            Symbol
+                        </th>
+                        <th>
+                            Melting Point
+                        </th>
+                        <th>
+                            Boiling Point
+                        </th>
+                        <th>
+                            Density
+                        </th>
+                        <th>
+                            Earth Crust %
+                        </th>
+                        <th>
+                            Discovered
+                        </th>
+                        <th>
+                            Group
+                        </th>
+                        <th>
+                            Electron Configuration
+                        </th>
+                        <th>
+                            Ionization Energy
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {{ singleElement.ID }}
+                        </td>
+                        <td>
+                            {{ singleElement.AtomicWeight }}
+                        </td>
+                        <td>
+                            {{singleElement.Name }}
+                        </td>
+                        <td>
+                            {{singleElement.Symbol }}
+                        </td>
+                        <td>
+                            {{singleElement.MeltingPoint }}
+                        </td>
+                        <td>
+                            {{ singleElement.BoilingPoint }}
+                        </td>
+                        <td>
+                            {{ singleElement.Density }}
+                        </td>
+                        <td>
+                            {{ singleElement.EarthCrustPerCentage }}
+                        </td>
+                        <td>
+                            {{ singleElement.Discovered }}
+                        </td>
+                        <td>
+                            {{ singleElement.Group }}
+                        </td>
+                        <td>
+                            {{ singleElement.ElectronConfiguration }}
+                        </td>
+                        <td>
+                            {{ singleElement.IonizationEnergy }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <hr />
+        <div>
+            <input type="button" ng-click="fetchElements()" value="Get Elements" class="btn btn-success">
+
+            Order by: <select ng-model="orderByField">
+                <option value="ElementName">ElementName</option>
+                <option value="Symbol">Symbol</option>
+            </select>
+
+            Descending: <input type="checkbox" ng-model="isOrderDescending" />
+            Filter: <input type="text" ng-model="filterString" value="" />
+
+            <table class="table table table-striped" ng-show="elements.length > 0">
+                <thead>
+                    <tr>
+                        <th>
+                            Atomic Number
+                        </th>
+                        <th>
+                            Atomic Weight
+                        </th>
+                        <th>
+                            Element Name
+                        </th>
+                        <th>
+                            Symbol
+                        </th>
+                        <th>
+                            Melting Point
+                        </th>
+                        <th>
+                            Boiling Point
+                        </th>
+                        <th>
+                            Density
+                        </th>
+                        <th>
+                            Earth Crust %
+                        </th>
+                        <th>
+                            Discovered
+                        </th>
+                        <th>
+                            Group
+                        </th>
+                        <th>
+                            Electron Configuration
+                        </th>
+                        <th>
+                            Ionization Energy
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="singleElement in elements | orderBy: (isOrderDescending == true ? '-': '') + orderByField | filter:filterString">
+                        <td>
+                            {{ singleElement.ID }}
+                        </td>
+                        <td>
+                            {{ singleElement.AtomicWeight }}
+                        </td>
+                        <td>
+                            {{singleElement.Name }}
+                        </td>
+                        <td>
+                            {{singleElement.Symbol }}
+                        </td>
+                        <td>
+                            {{singleElement.MeltingPoint }}
+                        </td>
+                        <td>
+                            {{ singleElement.BoilingPoint }}
+                        </td>
+                        <td>
+                            {{ singleElement.Density }}
+                        </td>
+                        <td>
+                            {{ singleElement.EarthCrustPerCentage }}
+                        </td>
+                        <td>
+                            {{ singleElement.Discovered }}
+                        </td>
+                        <td>
+                            {{ singleElement.Group }}
+                        </td>
+                        <td>
+                            {{ singleElement.ElectronConfiguration }}
+                        </td>
+                        <td>
+                            {{ singleElement.IonizationEnergy }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </main>
+</body>
+</html>

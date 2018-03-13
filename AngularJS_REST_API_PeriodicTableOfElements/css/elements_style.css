@@ -1,0 +1,134 @@
+h1 {
+	text-align: center;
+}
+
+.body-cep {
+	width: 90%;
+	width: 90vw;
+	margin: 1vh auto;
+	color: black;
+}
+
+.elements 
+{
+	font-size: 18px; 
+	background-color: White;
+}
+
+.btn-cep {
+  display: inline-block;
+  padding: 6px 12px 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: bold;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-left: -2px;
+  margin-right: -2px;
+ }  
+
+.btn-success-cep {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.btn-success-cep:hover,
+.btn-success-cep:focus,
+.btn-success-cep:active,
+.btn-success-cep.active
+ {
+  color: #ffffff;
+  background-color: #A3FF9B;
+  border-color: #ffffff;
+}
+
+.btn-alkali-metal-cep {
+  background-color: Salmon;
+  border-color: #FFd0d2;
+}
+
+.btn-alkaline-earth-cep {
+  background-color: PeachPuff;
+  border-color: #FFeAe9;
+}
+
+.btn-transition-metal-cep {
+  background-color: LightGoldenRodYellow;
+  border-color: #FbFbf2;
+}
+
+.btn-basic-metal-cep {
+  background-color: LightGreen;
+  border-color: #a0fEa0;
+}
+
+.btn-semimetal-cep {
+  background-color: LightSkyBlue;
+  border-color: #1C7AFF;
+}
+
+.btn-nonmetal-cep {
+  background-color: LightBlue;
+  border-color: #bDe8f6;
+}
+
+.btn-halogen-cep {
+  background-color: MediumOrchid;
+  border-color: #cA65e3;
+}
+
+.btn-noblegas-cep {
+  background-color: LightSteelBlue;
+  border-color: #c0d4fE ;
+}
+
+.btn-small-lanthanides-cep {
+  padding: 6px 12px 6px 0px;
+  font-size: 9px;
+  background-color: Pink;
+  border-color: #FFFF0C;
+}
+
+.btn-lanthanides-cep {
+  background-color: Pink;
+  border-color: #FFd0d0;
+}
+
+.btn-small-actinides-cep {
+  padding: 6px 12px 6px 0px;
+  font-size: 10px;
+  background-color: Plum;
+  border-color: #FF47BB;
+}
+
+.btn-actinides-cep {
+  background-color: Plum;
+  border-color: #FF47BB;
+}
+
+.btn-empty-cep {
+  display: inline-block;
+  padding: 6px 12px 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.1;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: White;
+  border-color: White;
+   margin-left: -2px;
+  margin-right: -2px;
+}
